@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -12,61 +13,81 @@ const links = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <nav className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800">
-      <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
+    <nav className="sticky top-0 z-50 bg-slate-900/[0.92] backdrop-blur-md border-b border-white/[0.08]">
+      <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
 
         {/* Logo */}
-        <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight text-white"
-        >
-          Thomas Van Sande
+        <Link href="/" className="text-base font-medium tracking-tight text-white">
+          Thomas<span className="text-white/40">VS</span>
         </Link>
 
-        <div className="flex items-center gap-8">
+        {/* Desktop links — hidden below md breakpoint */}
+        <ul className="hidden md:flex items-center gap-0.5 text-sm font-medium">
+          {links.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
+                className={
+                  isActive(link.href)
+                    ? "block px-3 py-1.5 rounded-md transition-colors text-white bg-white/10"
+                    : "block px-3 py-1.5 rounded-md transition-colors text-white/50 hover:text-white/90 hover:bg-white/[0.06]"
+                }
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-          {/* Links */}
-          <ul className="flex gap-6 text-sm font-medium">
-            {links.map((link) => {
-              const isActive =
-                pathname === link.href ||
-                pathname.startsWith(link.href + "/");
+        {/* Hamburger — visible below md breakpoint */}
+        <button
+          className="md:hidden p-2 rounded-md text-white/70 hover:bg-white/[0.06] transition-colors"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? (
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <line x1="1" y1="1" x2="17" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <line x1="17" y1="1" x2="1" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <line x1="0" y1="4" x2="18" y2="4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <line x1="0" y1="9" x2="18" y2="9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <line x1="0" y1="14" x2="18" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          )}
+        </button>
 
-              return (
-                <li key={link.href} className="relative">
-                  <Link
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`transition-colors ${
-                      isActive
-                        ? "text-white"
-                        : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-
-                  {/* Active underline */}
-                  {isActive && (
-                    <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-white" />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* CTA */}
-          <Link
-            href="/contact"
-            className="rounded-md bg-white text-slate-900 px-4 py-2 text-sm font-medium hover:bg-slate-200 transition"
-          >
-            Contact
-          </Link>
-
-        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div className="md:hidden border-t border-white/[0.08] px-6 py-3 flex flex-col gap-1">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={
+                isActive(link.href)
+                  ? "block px-3 py-2 rounded-md text-sm font-medium transition-colors text-white bg-white/10"
+                  : "block px-3 py-2 rounded-md text-sm font-medium transition-colors text-white/50 hover:text-white/90 hover:bg-white/[0.06]"
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
