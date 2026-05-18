@@ -24,7 +24,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="text-base font-medium tracking-tight text-white">
-          Thomas<span className="text-white/40">VS</span>
+          Thomas<span className="text-white/40"> Van Sande</span>
         </Link>
 
         {/* Desktop links — hidden below md breakpoint */}
@@ -48,7 +48,7 @@ export default function Navbar() {
 
         {/* Hamburger — visible below md breakpoint */}
         <button
-          className="md:hidden p-2 rounded-md text-white/70 hover:bg-white/[0.06] transition-colors"
+          className="md:hidden p-2 rounded-md text-white/70 hover:bg-white/[0.06] transition-colors cursor-pointer"
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >
