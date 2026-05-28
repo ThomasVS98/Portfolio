@@ -8,10 +8,15 @@ import {
   Eye,
   MessageSquare,
   Search,
-  Cloud,
   BarChart3,
-  Database
+  Database,
+  BookOpen,
+  Landmark,
+  Footprints,
+  MapPin,
+  Mail
 } from "lucide-react";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
 export default function About() {
   const skills = [
@@ -28,22 +33,22 @@ export default function About() {
 
   const interests = [
     {
-      icon: "📚",
+      icon: BookOpen,
       title: "Literatuur",
       description:
-        "Lezen helpt me mijn analytisch denken en kritische reflectie verder te ontwikkelen."
+        "Ik haal veel rust en inspiratie uit lezen. Het helpt me kritisch te blijven nadenken en nieuwe perspectieven te ontdekken."
     },
     {
-      icon: "🏛",
+      icon: Landmark,
       title: "Geschiedenis",
       description:
-        "Mijn interesse in geschiedenis versterkt mijn nieuwsgierigheid naar complexe systemen en evoluties."
+        "Geschiedenis fascineert me omdat het inzicht geeft in hoe complexe systemen ontstaan, evolueren en veranderen doorheen de tijd."
     },
     {
-      icon: "🏃",
+      icon: Footprints,
       title: "Lopen",
       description:
-        "Lopen helpt me focus, discipline en doorzettingsvermogen te onderhouden."
+        "Lopen geeft me energie en helpt me mijn gedachten te ordenen. Ook is het enorm rustgevend om in de natuur even tot rust te komen."
     }
   ];
 
@@ -60,12 +65,13 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="flex justify-center"
         >
-         <Image
-          src="/tvs.jpg"
+        <Image
+          src="/profile.jpg"
           alt="Thomas Van Sande"
-          width={288}
-          height={288}
-          className="w-72 h-72 rounded-2xl object-cover shadow-lg ring-1 ring-slate-200"
+          width={320}
+          height={400}
+          priority
+          className="w-72 rounded-2xl object-contain shadow-lg ring-1 ring-slate-200"
         />
         </motion.div>
 
@@ -140,9 +146,11 @@ export default function About() {
             <motion.div
               key={interest.title}
               whileHover={{ scale: 1.03 }}
-              className="bg-white rounded-2xl p-8 shadow-sm text-center space-y-4"
+              className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-slate-100 text-center space-y-5 hover:shadow-xl transition-all duration-300"
             >
-              <div className="text-4xl">{interest.icon}</div>
+              <div className="flex justify-center text-slate-700">
+                <interest.icon size={40} strokeWidth={1.8} />
+              </div>
 
               <h3 className="text-lg font-semibold text-slate-900">
                 {interest.title}
@@ -159,37 +167,72 @@ export default function About() {
       {/* CONTACT + CV */}
       <section className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto pb-12">
 
-        <div className="bg-white rounded-2xl p-8 shadow-sm space-y-4">
+        {/* Contact */}
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-slate-100 flex flex-col justify-center space-y-6">
           <h2 className="text-2xl font-semibold text-slate-900">
             Contact
           </h2>
 
-          <p className="text-gray-600">📍 Herentals, België</p>
-          <p className="text-gray-600">✉ thomas-vansande@hotmail.com</p>
-          <p className="text-gray-600">💼 LinkedIn</p>
-          <p className="text-gray-600">💻 GitHub</p>
+          <div className="space-y-4">
+
+            <div className="flex items-center gap-3 text-gray-600">
+              <MapPin size={18} />
+              <span>Herentals, België</span>
+            </div>
+
+            <a
+              href="mailto:thomas-vansande@hotmail.com"
+              className="flex items-center gap-3 text-gray-600 hover:text-slate-900 transition"
+            >
+              <Mail size={18} />
+              <span>thomas-vansande@hotmail.com</span>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/thomas-van-sande"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-gray-600 hover:text-slate-900 transition"
+            >
+              <FaLinkedinIn size={18} />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="https://github.com/ThomasVS98"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-gray-600 hover:text-slate-900 transition"
+            >
+              <FaGithub size={18} />
+              <span>GitHub</span>
+            </a>
+
+          </div>
         </div>
 
-        <div className="bg-slate-900/90 text-white rounded-2xl p-8 shadow-sm flex flex-col justify-center items-center text-center space-y-6">
+        {/* CV */}
+        <div className="bg-slate-800/95 text-white rounded-2xl p-8 shadow-lg flex flex-col justify-center items-center text-center space-y-6">
           <h2 className="text-2xl font-semibold">
             Curriculum Vitae
           </h2>
 
           <p className="text-white/80">
-            Download mijn curriculum vitae voor een volledig overzicht van mijn
-            opleiding, ervaring en technische vaardigheden.
+            Download mijn CV voor een volledig overzicht van mijn opleiding,
+            technische expertise en relevante ervaring.
           </p>
 
-          <Link
-            href="/cv.pdf"
-            className="px-7 py-3.5 bg-white text-slate-900 rounded-lg font-medium hover:opacity-90 transition"
+          <a
+            href="/CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold hover:bg-slate-100 hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Download CV
-          </Link>
+          </a>
         </div>
 
       </section>
-
     </div>
   );
 }
