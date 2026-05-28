@@ -6,9 +6,9 @@ import { useState } from "react";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/internship", label: "Internship" },
+  { href: "/overmij", label: "Over mij" },
+  { href: "/stage", label: "Stage" },
+  { href: "/realisaties", label: "Realisaties" }
 ];
 
 export default function Navbar() {
@@ -20,15 +20,15 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-slate-900/[0.92] backdrop-blur-md border-b border-white/[0.08]">
-      <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="text-base font-medium tracking-tight text-white">
-          Thomas<span className="text-white/40"> Van Sande</span>
+        <Link href="/" className="text-xl font-semibold tracking-tight text-white">
+          Thomas Van Sande
         </Link>
 
         {/* Desktop links — hidden below md breakpoint */}
-        <ul className="hidden md:flex items-center gap-0.5 text-sm font-medium">
+        <ul className="hidden md:flex items-center gap-1 text-base font-medium">
           {links.map((link) => (
             <li key={link.href}>
               <Link

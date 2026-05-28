@@ -1,11 +1,27 @@
 "use client";
 
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
+import {useEffect, useState} from "react";
 import Link from "next/link";
 
 export default function Home() {
+  const subtitles = [
+    "Student Applied Computer Science",
+    "Afstudeerrichting Machine Learning"
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % subtitles.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="space-y-28">
+    <div className="space-y-16">
       
 
       {/* HERO */}
@@ -20,14 +36,20 @@ export default function Home() {
           Thomas Van Sande
         </motion.h1>
 
+    <div className="min-h-[2.5rem] flex items-center justify-center">
+      <AnimatePresence mode="wait">
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          key={subtitles[index]}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.6 }}
           className="text-xl text-gray-700"
         >
-          Student Applied Computer Science met specialisatie in Machine Learning
+          {subtitles[index]}
         </motion.p>
+      </AnimatePresence>
+    </div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -36,7 +58,7 @@ export default function Home() {
           className="text-gray-500 text-base max-w-2xl mx-auto"
         >
           Dit portfolio vormt het sluitstuk van mijn bacheloropleiding en bundelt
-          mijn projecten, vaardigheden en stage-ervaring als bewijs van mijn ontwikkeling tot IT-professional.
+          mijn realisaties, vaardigheden en stage-ervaring als bewijs van mijn ontwikkeling tot IT-professional.
         </motion.p>
 
         <motion.div
@@ -46,10 +68,10 @@ export default function Home() {
           className="pt-6"
         >
           <Link
-            href="/projects"
+            href="/realisaties"
             className="inline-block px-7 py-3.5 bg-slate-900/90 backdrop-blur-md text-white rounded-lg text-base font-medium hover:bg-slate-800/90 shadow-sm hover:shadow-lg transition"
           >
-            Bekijk mijn projecten →
+            Ontdek mijn realisaties →
           </Link>
         </motion.div>
 
@@ -59,9 +81,9 @@ export default function Home() {
       <section className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
 
   {[
-    { href: "/projects", label: "Projects" },
-    { href: "/internship", label: "Internship" },
-    { href: "/about", label: "About" },
+    { href: "/realisaties", label: "Realisaties" },
+    { href: "/stage", label: "Stage" },
+    { href: "/overmij", label: "Over mij" },
   ].map((item) => (
     <motion.div
       key={item.href}
