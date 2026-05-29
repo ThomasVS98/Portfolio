@@ -48,7 +48,7 @@ export default function About() {
       icon: Footprints,
       title: "Lopen",
       description:
-        "Lopen geeft me energie en helpt me mijn gedachten te ordenen. Ook is het enorm rustgevend om in de natuur even tot rust te komen."
+        "Lopen geeft me energie en helpt me mijn gedachten te ordenen. Het is ook enorm aangenaam om in de natuur even tot rust te komen."
     }
   ];
 
