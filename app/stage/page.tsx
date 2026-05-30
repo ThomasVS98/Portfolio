@@ -64,7 +64,7 @@ export default function Stage() {
   {
     title: "Realisatiedocument",
     file: "/documents/Realisatiedocument.pdf",
-    description: "Technische uitwerking volgens de 5W1H-methodiek"
+    description: "Volledige analyse en documentatie van de implementatie"
   },
   {
     title: "Reflectie",
