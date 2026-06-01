@@ -14,7 +14,8 @@ import {
   Landmark,
   Footprints,
   MapPin,
-  Mail
+  Mail,
+  Phone
 } from "lucide-react";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
@@ -188,6 +189,11 @@ export default function About() {
               <span>thomas-vansande@hotmail.com</span>
             </a>
 
+            <div className="flex items-center gap-3 text-gray-600">
+              <Phone size={18} />
+              <span>+32 496 223 269</span>
+            </div>
+
             <a
               href="https://www.linkedin.com/in/thomas-van-sande"
               target="_blank"
@@ -207,6 +213,7 @@ export default function About() {
               <FaGithub size={18} />
               <span>GitHub</span>
             </a>
+
 
           </div>
         </div>
