@@ -25,7 +25,8 @@ export default function Home() {
       
 
       {/* HERO */}
-      <section className="text-center max-w-3xl mx-auto space-y-8 pt-10">
+      <section className="relative text-center max-w-3xl mx-auto space-y-8 pt-10">
+      
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -50,6 +51,19 @@ export default function Home() {
         </motion.p>
       </AnimatePresence>
     </div>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.15, duration: 0.6 }}
+      className="py-4"
+    >
+      <p className="max-w-3xl mx-auto text-center text-2xl md:text-3xl font-light leading-relaxed text-slate-700">
+        <span className="font-semibold text-slate-900">AI</span> inzetten om mensen te ondersteunen
+        <br />
+        en complexe processen te vereenvoudigen.
+      </p>
+    </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
