@@ -8,8 +8,12 @@ import {
   FileText,
   Award
 } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function Realisaties() {
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const projects = [
     {
       title: "Cloudway — Multimodale AI-integratie",
@@ -38,6 +42,10 @@ export default function Realisaties() {
         label: "Technische documentatie",
         file: "/documents/cloudway-documentatie.pdf"
       }
+    ],
+        screenshots: [
+      "/images/cloudway-1.png",
+      "/images/cloudway-2.png"
     ]
     },
 
@@ -62,6 +70,9 @@ export default function Realisaties() {
           label: "Projectrapport",
           file: "/documents/cv-rapport.pdf"
         }
+      ],
+      screenshots: [
+        "/images/tennis-1.png"
       ]
     },
     {
@@ -91,6 +102,8 @@ export default function Realisaties() {
     }
 
   ];
+
+
 
   return (
     <div className="space-y-20">
@@ -169,6 +182,32 @@ export default function Realisaties() {
                   </div>
                 </div>
 
+                {project.screenshots && (
+                  <div>
+                    <h3 className="font-semibold mb-3">
+                      Screenshots
+                    </h3>
+
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {project.screenshots.map((src) => (
+                        <button
+                          key={src}
+                          onClick={() => setSelectedImage(src)}
+                          className="overflow-hidden rounded-xl border border-slate-200 cursor-pointer"
+                        >
+                          <Image
+                            src={src}
+                            alt="Project screenshot"
+                            width={600}
+                            height={400}
+                            className="w-full h-auto hover:scale-105 transition duration-300"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <h3 className="font-semibold mb-3">
                     Bewijsmateriaal
@@ -195,7 +234,50 @@ export default function Realisaties() {
           );
         })}
       </section>
+        {selectedImage && (
+  <div
+    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+    onClick={() => setSelectedImage(null)}
+  >
+    <div
+      className="relative max-w-6xl max-h-[90vh]"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <Image
+        src={selectedImage}
+        alt="Vergrote screenshot"
+        width={1600}
+        height={900}
+        className="max-h-[90vh] w-auto rounded-xl"
+      />
 
+      <button
+      onClick={() => setSelectedImage(null)}
+      className="
+        absolute
+        top-4
+        right-4
+        w-10
+        h-10
+        rounded-full
+        bg-white/95
+        border
+        border-slate-300
+        text-slate-700
+        hover:bg-white
+        transition
+        cursor-pointer
+        flex
+        items-center
+        justify-center
+        shadow-sm
+      "
+    >
+      ✕
+    </button>
+    </div>
+  </div>
+)}
     </div>
   );
 }
